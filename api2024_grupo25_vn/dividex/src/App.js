@@ -12,9 +12,9 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<ProjectDashboard />} />
-          <Route path="/project/:id" element={<ProjectDetail />} />{" "}
-          {/* Asegúrate de usar :id para recibir el ID */}
-          <Route path="/upload-ticket" element={<TicketUpload />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/ticket/:id" element={<TicketUpload />} />{" "}
+          {/* Modificado aquí */}
           <Route path="/expense-summary" element={<ExpenseSummary />} />
           <Route path="/report" element={<ReportScreen />} />
         </Routes>
