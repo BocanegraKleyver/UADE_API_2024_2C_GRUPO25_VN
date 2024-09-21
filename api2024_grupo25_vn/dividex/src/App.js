@@ -1,6 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './screen/Login'; // Asumiendo que tienes el componente Login
 
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {/* Otras rutas pueden ir aquí */}
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+/**
 function App() {
   return (
     <div className="App">
@@ -23,3 +39,4 @@ function App() {
 }
 
 export default App;
+**/
