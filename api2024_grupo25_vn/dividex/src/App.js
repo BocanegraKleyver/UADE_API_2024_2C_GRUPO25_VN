@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Login from './screen/Login';
+import Registro from './screen/Registro'
 
 function App() {
+  const handleRegister = (usuario) => {
+    console.log('Usuario registrado:', usuario);
+    // Aquí puedes manejar lo que sucede cuando un usuario se registra
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/registro" element={<Registro onRegister={handleRegister} />} />
+        {/* Otras rutas pueden ir aquí */}
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 export default App;
