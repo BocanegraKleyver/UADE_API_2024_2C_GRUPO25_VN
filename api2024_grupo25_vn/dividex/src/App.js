@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ProjectDashboard from "./screens/ProjectDashboard";
+import ProjectDetail from "./screens/ProjectDetail";
+import TicketUpload from "./screens/TicketUpload";
+import ExpenseSummary from "./screens/ExpenseSummary";
+import ReportScreen from "./screens/ReportScreen";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<ProjectDashboard />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />{" "}
+          {/* Asegúrate de usar :id para recibir el ID */}
+          <Route path="/upload-ticket" element={<TicketUpload />} />
+          <Route path="/expense-summary" element={<ExpenseSummary />} />
+          <Route path="/report" element={<ReportScreen />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

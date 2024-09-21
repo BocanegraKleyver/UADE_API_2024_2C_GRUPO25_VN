@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nombre": "Kley PoolParty",
+    "descripcion": "La mejor fiesta poolparty",
+    "miembros": [1, 2],
+    "tickets": [],
+    "estado": "activo"
+  },
+  {
+    "id": 2,
+    "nombre": "Carilo2024",
+    "descripcion": "Beaching",
+    "miembros": [3, 4],
+    "tickets": [],
+    "estado": "terminado"
+  }
+]
