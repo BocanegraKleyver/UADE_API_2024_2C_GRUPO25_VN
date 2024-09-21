@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-const MemberList = ({ miembros, onAddMember, onRemoveMember }) => {
-  const [nuevoMiembro, setNuevoMiembro] = useState('');
+const MemberList = ({ miembros, onAddMember, onRemoveMember, usuarios }) => {
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
 
   const handleAdd = () => {
-    if (nuevoMiembro.trim() === '') return;
-    onAddMember(nuevoMiembro);
-    setNuevoMiembro('');
+    if (!usuarioSeleccionado) return;
+    onAddMember(JSON.parse(usuarioSeleccionado)); // Agregar el usuario seleccionado
+    setUsuarioSeleccionado(''); // Limpiar la selección
   };
 
   return (
@@ -15,19 +15,22 @@ const MemberList = ({ miembros, onAddMember, onRemoveMember }) => {
       <ul>
         {miembros.map((miembro, index) => (
           <li key={index}>
-            {miembro} 
-            <button onClick={() => onRemoveMember(miembro)}>Eliminar</button>
+            {miembro.name} {miembro.apellido} 
+            <button className="button" onClick={() => onRemoveMember(miembro)}>Eliminar</button>
           </li>
         ))}
       </ul>
 
-      <input
-        type="text"
-        value={nuevoMiembro}
-        onChange={(e) => setNuevoMiembro(e.target.value)}
-        placeholder="Agregar nuevo miembro"
-      />
-      <button onClick={handleAdd}>Añadir Miembro</button>
+      <select value={usuarioSeleccionado} onChange={(e) => setUsuarioSeleccionado(e.target.value)}>
+        <option value="">Seleccionar Miembro</option>
+        {usuarios.map((usuario) => (
+          <option key={usuario.id} value={JSON.stringify(usuario)}>
+            {usuario.name} {usuario.apellido}
+          </option>
+        ))}
+      </select>
+      
+      <button className="button" onClick={handleAdd}>Añadir Miembro</button>
     </div>
   );
 };

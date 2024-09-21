@@ -102,3 +102,37 @@ th {
 tr:hover {
   background-color: #f1f1f1; /* Color de fila en hover */
 }
+
+
+.action-buttons {
+  display: flex; /* Usar flex para alinear los botones */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.delete-button {
+  background-color: red; /* Color rojo */
+  color: white;
+  padding: 8px 12px; /* Ajusta el padding según sea necesario */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: darkred; /* Color hover más oscuro */
+}
+
+.validate-button {
+  background-color: #28a745; /* Verde */
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.validate-button:hover {
+  background-color: #218838; /* Color hover más oscuro */
+}

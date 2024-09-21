@@ -5,6 +5,8 @@ export const getProjects = () => {
   return projects ? JSON.parse(projects) : []; // Cargar del local storage
 };
 
+
+
 export const saveProject = (project) => {
   const existingProjects = getProjects();
   if (project.id) {
@@ -23,4 +25,10 @@ export const saveProject = (project) => {
 
   // Guarda los proyectos actualizados en el local storage
   localStorage.setItem('projects', JSON.stringify(existingProjects));
+};
+
+export const deleteProject = (projectId) => {
+  const existingProjects = getProjects();
+  const updatedProjects = existingProjects.filter(project => project.id !== projectId);
+  localStorage.setItem('projects', JSON.stringify(updatedProjects)); // Guarda los proyectos actualizados
 };

@@ -1,4 +1,4 @@
-[
+const usuarios = [
   {
     "id": 1,
     "email": "usuario1@example.com",
@@ -22,21 +22,8 @@
     "name": "Luis",
     "apellido": "Fernández",
     "telefono": "1122334455"
-  },
-  {
-    "id": 4,
-    "email": "usuario4@example.com",
-    "password": "hashed_password_4",
-    "name": "Ana",
-    "apellido": "Martínez",
-    "telefono": "2233445566"
-  },
-  {
-    "id": 5,
-    "email": "usuario5@example.com",
-    "password": "hashed_password_5",
-    "name": "Carlos",
-    "apellido": "Sánchez",
-    "telefono": "3344556677"
   }
-]
+];
+
+
+localStorage.setItem('users', JSON.stringify(usuarios));

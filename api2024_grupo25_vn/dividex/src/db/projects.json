@@ -13,6 +13,14 @@
     "descripcion": "Beaching",
     "miembros": [3, 4],
     "tickets": [],
-    "estado": "terminado"
+    "estado": "activo"
+  },
+  {
+    "id": 3,
+    "nombre": "Carilo2024",
+    "descripcion": "Beaching",
+    "miembros": [3, 4],
+    "tickets": [],
+    "estado": "activo"
   }
 ]
