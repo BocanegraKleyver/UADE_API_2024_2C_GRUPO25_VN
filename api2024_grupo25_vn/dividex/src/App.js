@@ -6,6 +6,7 @@ import TicketUpload from "./screens/TicketUpload";
 import ExpenseSummary from "./screens/ExpenseSummary";
 import ReportScreen from "./screens/ReportScreen";
 import Login from "./screens/Login"; // Asumiendo que tienes el componente Login
+import Registro from "./screens/Registro";
 import initializeLocalStorage from "../src/db/initializeData"; // Asegúrate de que la ruta sea correcta
 
 function App() {
@@ -16,11 +17,20 @@ function App() {
     initializeData();
   }, []);
 
+  const handleRegister = (usuario) => {
+    console.log("Usuario registrado:", usuario);
+    // Aquí puedes manejar lo que sucede cuando un usuario se registra
+  };
+
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route
+            path="/registro"
+            element={<Registro onRegister={handleRegister} />}
+          />
           <Route path="/project" element={<ProjectDashboard />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/ticket/:id" element={<TicketUpload />} />
@@ -31,5 +41,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
