@@ -1,4 +1,4 @@
-const usuarios = [
+[
   {
     "id": 1,
     "email": "usuario1@example.com",
@@ -23,7 +23,4 @@ const usuarios = [
     "apellido": "Fernández",
     "telefono": "1122334455"
   }
-];
-
-
-localStorage.setItem('users', JSON.stringify(usuarios));
+]

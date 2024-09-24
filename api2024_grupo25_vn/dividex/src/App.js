@@ -5,6 +5,7 @@ import ProjectDetail from "./screens/ProjectDetail";
 import TicketUpload from "./screens/TicketUpload";
 import ExpenseSummary from "./screens/ExpenseSummary";
 import ReportScreen from "./screens/ReportScreen";
+import Login from "./screens/Login"; // Asumiendo que tienes el componente Login
 import initializeLocalStorage from "../src/db/initializeData"; // Asegúrate de que la ruta sea correcta
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<ProjectDashboard />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/project" element={<ProjectDashboard />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/ticket/:id" element={<TicketUpload />} />
           <Route path="/expense-summary" element={<ExpenseSummary />} />
