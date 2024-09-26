@@ -27,8 +27,8 @@ function Login({ onLogin }) {
     // Verifica si el usuario existe y si el email coincide
     if (usuarioRegistrado && usuarioRegistrado.email === email) {
       onLogin(usuarioRegistrado); // Llama a la función onLogin con el usuario
-      console.log('Login successful, navigating to dashboard');
-      navigate('/dashboard'); // Navega al dashboard
+      console.log('Ingreso correcto, redirigiendo al home');
+      navigate('/home'); // Navega al home
     } else {
       alert('Correo electrónico o contraseña incorrectos'); // Muestra una alerta si las credenciales son incorrectas
     }

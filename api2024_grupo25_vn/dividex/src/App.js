@@ -8,6 +8,8 @@ import ReportScreen from "./screens/ReportScreen";
 import Login from "./screens/Login"; // Asumiendo que tienes el componente Login
 import Registro from "./screens/Registro";
 import initializeLocalStorage from "../src/db/initializeData"; // Asegúrate de que la ruta sea correcta
+import Home from "./screens/Home"; // Importar el nuevo componente
+import Perfil from "./screens/Perfil"
 
 function App() {
   useEffect(() => {
@@ -17,25 +19,31 @@ function App() {
     initializeData();
   }, []);
 
+  const handleLogin = (usuario) => {
+    // Lógica para manejar el inicio de sesión
+    console.log('Usuario logueado:', usuario);
+  };
+
   const handleRegister = (usuario) => {
+    // Lógica para manejar eñ registro de sesión
     console.log("Usuario registrado:", usuario);
-    // Aquí puedes manejar lo que sucede cuando un usuario se registra
+    
   };
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route
-            path="/registro"
-            element={<Registro onRegister={handleRegister} />}
-          />
-          <Route path="/project" element={<ProjectDashboard />} />
+          <Route path="/" element={<Login onLogin={handleLogin}/>} />
+          <Route path="/home" element={<Home />} /> 
+          <Route path="/registro" element={<Registro onRegister={handleRegister} />} />
+          <Route path="/proyectos" element={<ProjectDashboard />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/ticket/:id" element={<TicketUpload />} />
           <Route path="/expense-summary" element={<ExpenseSummary />} />
-          <Route path="/report" element={<ReportScreen />} />
+          <Route path="/reportes" element={<ReportScreen />} />
+          <Route path="/perfil" element={<Perfil />} />
+          
         </Routes>
       </div>
     </Router>
