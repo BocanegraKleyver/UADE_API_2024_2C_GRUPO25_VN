@@ -8,7 +8,7 @@ import ListaMiembros from '../components/MemberList';
 import { Link } from 'react-router-dom';
 
 const Inicio = () => {
-  const { user } = useContext(AuthContext); // Cambié usuario por user
+  const { user } = useContext(AuthContext);
   const [proyectos, setProyectos] = useState([]);
   const [totalGastos, setTotalGastos] = useState(0);
   const [totalDeuda, setTotalDeuda] = useState(0);
