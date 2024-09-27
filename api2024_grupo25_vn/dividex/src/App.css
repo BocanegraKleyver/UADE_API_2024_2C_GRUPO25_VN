@@ -1,38 +1,135 @@
+/* Reseteo de estilos básicos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* Cambia la tipografía por algo más profesional */
+  background-color: #f4f4f9; /* Fondo claro para mejorar la legibilidad */
+  color: #333; /* Color de texto legible */
+  line-height: 1.6;
+}
+
 .App {
+  max-width: 1200px;
+  margin: 0 auto; /* Centra el contenido */
+  padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+h1, h2, h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos del header */
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  display: none; /* Ocultar logo si no es necesario */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Links estilizados */
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+a:hover {
+  color: #0056b3;
+}
+
+/* Estilo de contenedores */
+.container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Grilla general */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+/* Sección de tickets, miembros y formularios */
+.section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.form-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo de tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
 }
