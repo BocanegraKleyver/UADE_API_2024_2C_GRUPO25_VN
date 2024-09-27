@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,21 +13,25 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import logo from './Logo_app.jpg'; // Asegúrate de que la ruta sea correcta
+import logo from './Logo_app.jpg';
+import { AuthContext } from '../context/AuthContext';
 
 const pages = ['proyectos', 'reportes', 'Blog'];
 const configuraciones = [
   { nombre: 'Perfil', ruta: '/perfil' },
-  { nombre: 'Salir', ruta: '/' },
+  { nombre: 'Salir', ruta: '/login' }, 
 ];
 
 function ResponsiveAppBar() {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate(); 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -39,6 +44,12 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    logout();
+    handleCloseUserMenu(); 
+    navigate('/');
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -48,7 +59,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/home" // Cambia esto a la ruta deseada
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -61,6 +72,7 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -103,7 +115,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="/home" // Cambia esto a la ruta deseada
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -123,8 +135,8 @@ function ResponsiveAppBar() {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                component="a" // Esto permite que el botón actúe como un enlace
-                href={`/${page.toLowerCase()}`} // Cambia esto a la ruta deseada
+                component="a"
+                href={`/${page.toLowerCase()}`}
               >
                 {page}
               </Button>
@@ -133,7 +145,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={logo} /> {/* Cambia esto si tienes un avatar diferente */}
+                <Avatar alt="Remy Sharp" src={logo} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -156,8 +168,8 @@ function ResponsiveAppBar() {
                 <MenuItem key={configuracion.nombre} onClick={handleCloseUserMenu}>
                   <Typography
                     sx={{ textAlign: 'center' }}
-                    component="a"
-                    href={configuracion.ruta} // Cambia esto a la ruta deseada
+                    component="button"
+                    onClick={configuracion.nombre === 'Salir' ? handleLogout : () => handleCloseUserMenu()}
                   >
                     {configuracion.nombre}
                   </Typography>

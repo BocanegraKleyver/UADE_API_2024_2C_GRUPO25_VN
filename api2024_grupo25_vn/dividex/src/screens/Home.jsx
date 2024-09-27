@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { obtenerProyectos, obtenerDeudasUsuario, obtenerGastosUsuario, obtenerDeudasAmigos } from '../components/CalculosHome'; // Asegúrate de tener estas funciones
+import React, { useEffect, useState, useContext } from 'react';
+import { obtenerProyectos, obtenerDeudasUsuario, obtenerGastosUsuario, obtenerDeudasAmigos } from '../components/CalculosHome';
 import '../css/Home.css';
 import BarraNavegacion from '../components/Navbar';
-import TablaGastos from '../components/ExpenseTable'; // Importar TablaGastos si es necesario
-import ListaMiembros from '../components/MemberList'; // Importar ListaMiembros si es necesario
-import { Link } from 'react-router-dom'; // Asegúrate de que la importación sea correcta
+import { AuthContext } from '../context/AuthContext'; 
+import TablaGastos from '../components/ExpenseTable';
+import ListaMiembros from '../components/MemberList';
+import { Link } from 'react-router-dom';
 
 const Inicio = () => {
+  const { user } = useContext(AuthContext); // Cambié usuario por user
   const [proyectos, setProyectos] = useState([]);
-  const [usuario, setUsuario] = useState({});
   const [totalGastos, setTotalGastos] = useState(0);
   const [totalDeuda, setTotalDeuda] = useState(0);
   const [deudaAmigos, setDeudaAmigos] = useState(0);
 
   useEffect(() => {
-    const usuarioAlmacenado = JSON.parse(localStorage.getItem('usuario'));
-    setUsuario(usuarioAlmacenado || {});
-
     const cargarProyectos = async () => {
       const proyectosCargados = await obtenerProyectos() || [];
       setProyectos(proyectosCargados);
     };
 
     const cargarDatosFinancieros = async () => {
-      const gastos = await obtenerGastosUsuario(); // Obtener gastos del usuario
-      const deuda = await obtenerDeudasUsuario(); // Obtener deudas del usuario
-      const deudaAmigos = await obtenerDeudasAmigos(); // Obtener deudas de amigos
+      const gastos = await obtenerGastosUsuario(); 
+      const deuda = await obtenerDeudasUsuario();  
+      const deudaAmigos = await obtenerDeudasAmigos(); 
 
       setTotalGastos(gastos);
       setTotalDeuda(deuda);
@@ -40,7 +38,7 @@ const Inicio = () => {
     <>
       <BarraNavegacion />
       <div className="contenedor-principal">
-        <h2>Bienvenido, {usuario.nombre || 'Usuario'}</h2>
+        <h2>Bienvenido, {user?.nombre || 'Usuario'}</h2> {/* Ahora utiliza user */}
         <div className="contenedor-totales">
           <div className="caja-total">
             <i className="icono-gastos" /> {/* Icono para gastos */}

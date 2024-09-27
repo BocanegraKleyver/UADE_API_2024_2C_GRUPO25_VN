@@ -1,43 +1,55 @@
-// Importación de módulos y componentes necesarios
-import React, { useState } from 'react'; // Importa React y el hook useState
-import { useNavigate } from 'react-router-dom'; // Importa el hook useNavigate para la navegación
-import Avatar from '@mui/material/Avatar'; // Componente Avatar de Material-UI
-import Button from '@mui/material/Button'; // Componente Button de Material-UI
-import CssBaseline from '@mui/material/CssBaseline'; // Componente CssBaseline de Material-UI
-import TextField from '@mui/material/TextField'; // Componente TextField de Material-UI
-import Box from '@mui/material/Box'; // Componente Box de Material-UI
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'; // Icono de candado de Material-UI
-import Typography from '@mui/material/Typography'; // Componente Typography de Material-UI
-import Container from '@mui/material/Container'; // Componente Container de Material-UI
-import Link from '@mui/material/Link'; // Componente Link de Material-UI
-import Grid from '@mui/material/Grid'; // Componente Grid de Material-UI
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import { AuthContext } from '../context/AuthContext'; 
 
-// Definición del componente Login
-function Login({ onLogin }) {
-  // Estados para manejar el email y la contraseña
+function Login() {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Hook para la navegación
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
-    e.preventDefault(); // Previene el comportamiento por defecto del formulario
-    const usuarioRegistrado = JSON.parse(localStorage.getItem('usuario')); // Obtiene el usuario registrado del localStorage
-    
-    // Verifica si el usuario existe y si el email coincide
-    if (usuarioRegistrado && usuarioRegistrado.email === email) {
-      onLogin(usuarioRegistrado); // Llama a la función onLogin con el usuario
-      console.log('Ingreso correcto, redirigiendo al home');
-      navigate('/home'); // Navega al home
-    } else {
-      alert('Correo electrónico o contraseña incorrectos'); // Muestra una alerta si las credenciales son incorrectas
-    }
-  };
+    e.preventDefault();
+    const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-  // Renderizado del componente
+
+    if (!email || !password) {
+        setErrorMessage('Por favor, complete todos los campos.');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        setErrorMessage('Ingrese un correo electrónico válido.');
+        return;
+    }
+
+
+    const usuarioEncontrado = usuariosRegistrados.find(usuario => usuario.email === email && usuario.password === password);
+
+    if (usuarioEncontrado) {
+        login(usuarioEncontrado);
+        navigate('/home');
+    } else {
+        setErrorMessage('Correo electrónico o contraseña incorrectos');
+    }
+};
+
+
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline /> {/* Resetea los estilos CSS */}
+      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
@@ -46,17 +58,13 @@ function Login({ onLogin }) {
           alignItems: 'center',
         }}
       >
-        {/* Avatar con icono de candado */}
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        {/* Título del formulario */}
         <Typography component="h1" variant="h5">
           Iniciar sesión
         </Typography>
-        {/* Formulario de inicio de sesión */}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          {/* Campo de entrada para el email */}
           <TextField
             margin="normal"
             required
@@ -68,8 +76,8 @@ function Login({ onLogin }) {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            error={!!errorMessage}
           />
-          {/* Campo de entrada para la contraseña */}
           <TextField
             margin="normal"
             required
@@ -81,17 +89,16 @@ function Login({ onLogin }) {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            error={!!errorMessage}
           />
-          {/* Botón de envío del formulario */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          {errorMessage && (
+            <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+              {errorMessage}
+            </Typography>
+          )}
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Iniciar sesión
           </Button>
-          {/* Enlace para registrarse */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/registro" variant="body2">
@@ -105,4 +112,4 @@ function Login({ onLogin }) {
   );
 }
 
-export default Login; // Exporta el componente Login
+export default Login;
