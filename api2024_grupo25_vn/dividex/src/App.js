@@ -52,13 +52,9 @@ function App() {
             path="/expense-summary"
             element={<ExpenseSummary tickets={tickets} />}
           />{" "}
-          {/* Pasa los tickets aquí */}
-          <Route path="/reportes" element={<ReportScreen />} />
-          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </div>
     </Router>
   );
 }
-
 export default App;
