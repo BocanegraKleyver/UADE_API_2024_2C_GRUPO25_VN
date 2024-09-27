@@ -50,6 +50,10 @@ function ResponsiveAppBar() {
     navigate('/');
   };
 
+  const handlePerfil = () => {
+    navigate('/perfil');
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

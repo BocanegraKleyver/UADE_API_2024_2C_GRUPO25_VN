@@ -1,13 +1,15 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext'; // Asegúrate de que la ruta sea correcta
+import React from 'react';
 
-const MemberList = ({ miembros, onAddMember, onRemoveMember }) => {
-  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
-  const { usuarios } = useContext(AuthContext); // Acceder a usuarios desde AuthContext
-
+const MemberList = ({ miembros, onAddMember, onRemoveMember, usuarios, usuarioSeleccionado, setUsuarioSeleccionado }) => {
   const handleAdd = () => {
-    if (!usuarioSeleccionado) return;
-    onAddMember(JSON.parse(usuarioSeleccionado)); // Agregar el usuario seleccionado
+    console.log('Usuario seleccionado:', usuarioSeleccionado); // Verifica el valor aquí
+    if (!usuarioSeleccionado) {
+      alert("Selecciona un usuario para agregar");
+      return;
+    }
+
+    const nuevoMiembro = JSON.parse(usuarioSeleccionado); // Parsear el usuario seleccionado
+    onAddMember(nuevoMiembro); // Agregar el usuario seleccionado
     setUsuarioSeleccionado(''); // Limpiar la selección
   };
 
@@ -17,7 +19,8 @@ const MemberList = ({ miembros, onAddMember, onRemoveMember }) => {
       <ul>
         {miembros.map((miembro, index) => (
           <li key={index}>
-            {miembro.name} {miembro.apellido} 
+            {/* Cambia name y apellido por nombre y email */}
+            {miembro.nombre} ({miembro.email}) 
             <button className="button" onClick={() => onRemoveMember(miembro)}>Eliminar</button>
           </li>
         ))}
@@ -25,14 +28,15 @@ const MemberList = ({ miembros, onAddMember, onRemoveMember }) => {
 
       <select value={usuarioSeleccionado} onChange={(e) => setUsuarioSeleccionado(e.target.value)}>
         <option value="">Seleccionar Miembro</option>
-        {usuarios.length > 0 ? ( // Verifica que haya usuarios para mapear
+        {usuarios && usuarios.length > 0 ? (
           usuarios.map((usuario) => (
             <option key={usuario.id} value={JSON.stringify(usuario)}>
-              {usuario.name} {usuario.apellido} ({usuario.email}) {/* Muestra el email también */}
+              {/* Cambia name y apellido por nombre y email */}
+              {usuario.nombre} ({usuario.email})
             </option>
           ))
         ) : (
-          <option disabled>No hay miembros disponibles</option> // Mensaje si no hay usuarios
+          <option disabled>No hay miembros disponibles</option>
         )}
       </select>
       

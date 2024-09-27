@@ -1,12 +1,29 @@
+// src/services/ticketService.js
+
 const TICKETS_KEY = 'tickets';
 
 export const getTickets = () => {
-  const tickets = localStorage.getItem(TICKETS_KEY);
-  return tickets ? JSON.parse(tickets) : [];
+  return JSON.parse(localStorage.getItem('tickets')) || [];
 };
 
 export const saveTicket = (ticket) => {
-  const tickets = getTickets();
-  tickets.push(ticket);
-  localStorage.setItem(TICKETS_KEY, JSON.stringify(tickets));
+  const existingTickets = JSON.parse(localStorage.getItem('tickets')) || [];
+  existingTickets.push(ticket);
+  localStorage.setItem('tickets', JSON.stringify(existingTickets));
+};
+
+// Nuevas funciones para manejar la división de gastos
+export const divideExpensesEqually = (ticket, miembros) => {
+  const amountPerMember = ticket.montoTotal / miembros.length;
+  return miembros.map(miembro => ({
+    miembro,
+    monto: amountPerMember
+  }));
+};
+
+export const divideExpensesByPercentage = (ticket, miembros, percentages) => {
+  return miembros.map((miembro, index) => ({
+    miembro,
+    monto: (ticket.montoTotal * percentages[index]) / 100
+  }));
 };
