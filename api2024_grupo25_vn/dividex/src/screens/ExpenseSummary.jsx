@@ -1,5 +1,3 @@
-// src/screens/ExpenseSummary.jsx
-
 import React from 'react';
 import ExpenseTable from '../components/ExpenseTable';
 import { getTickets } from '../services/ticketService';

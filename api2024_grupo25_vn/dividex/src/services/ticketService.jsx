@@ -1,5 +1,3 @@
-// src/services/ticketService.js
-
 const TICKETS_KEY = 'tickets';
 
 export const getTickets = () => {
@@ -12,7 +10,7 @@ export const saveTicket = (ticket) => {
   localStorage.setItem('tickets', JSON.stringify(existingTickets));
 };
 
-// Nuevas funciones para manejar la división de gastos
+
 export const divideExpensesEqually = (ticket, miembros) => {
   const amountPerMember = ticket.montoTotal / miembros.length;
   return miembros.map(miembro => ({

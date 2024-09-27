@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MemberList from '../components/MemberList';
 import ExpenseTable from '../components/ExpenseTable';
 import { getProjects, saveProject } from '../services/projectService';
-import { AuthContext } from '../context/AuthContext'; // Asegúrate de tener la ruta correcta
+import { AuthContext } from '../context/AuthContext';
 import '../css/ProjectDetail.css';
 import { getUsers } from '../services/userService';
 import {getTickets } from '../services/ticketService';
@@ -11,7 +11,7 @@ import {getTickets } from '../services/ticketService';
 const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext); // Obtén el usuario del contexto
+  const { user } = useContext(AuthContext);
   const [miembros, setMiembros] = useState([]);
   const [tickets, setTickets] = useState([]);
   const [proyecto, setProyecto] = useState(null);
@@ -28,30 +28,30 @@ const ProjectDetail = () => {
       setProyecto(proyectoEncontrado);
       setMiembros(proyectoEncontrado.miembros || []);
       const storedTickets = getTickets();
-    const projectTickets = storedTickets.filter(ticket => ticket.proyectoId === proyectoEncontrado.id); // Filtrar por ID del proyecto
+    const projectTickets = storedTickets.filter(ticket => ticket.proyectoId === proyectoEncontrado.id);
     setTickets(projectTickets);
     } else {
       alert('Proyecto no encontrado');
       navigate('/home');
     }
   
-    // Cargar usuarios del localStorage
+
     const storedUsers = JSON.parse(localStorage.getItem('usuarios')) || [];
     setUsuarios(storedUsers);
   }, [id, navigate]);
 
   const handleAddMember = () => {
     if (usuarioSeleccionado) {
-      const nuevoMiembro = JSON.parse(usuarioSeleccionado); // Parsear el usuario seleccionado
-      const updatedMiembros = [...miembros, nuevoMiembro]; // Agregar el nuevo miembro como objeto
+      const nuevoMiembro = JSON.parse(usuarioSeleccionado);
+      const updatedMiembros = [...miembros, nuevoMiembro];
       
-      // Guardar los cambios en el proyecto
+
       const updatedProject = { ...proyecto, miembros: updatedMiembros };
       setMiembros(updatedMiembros);
       saveProject(updatedProject);
-      localStorage.setItem('miembros', JSON.stringify(updatedMiembros)); // Actualiza el Local Storage
+      localStorage.setItem('miembros', JSON.stringify(updatedMiembros));
       
-      setUsuarioSeleccionado(''); // Reiniciar selección a cadena vacía
+      setUsuarioSeleccionado('');
       alert("Miembro añadido exitosamente.");
     } else {
       alert("Selecciona un miembro antes de añadir.");
@@ -62,7 +62,7 @@ const ProjectDetail = () => {
     const updatedMiembros = miembros.filter((m) => m.email !== miembro.email);
     setMiembros(updatedMiembros);
     saveProject({ ...proyecto, miembros: updatedMiembros });
-    localStorage.setItem('miembros', JSON.stringify(updatedMiembros)); // Actualiza el Local Storage
+    localStorage.setItem('miembros', JSON.stringify(updatedMiembros));
   };
 
   if (!proyecto) return <div>No se encontró el proyecto.</div>;

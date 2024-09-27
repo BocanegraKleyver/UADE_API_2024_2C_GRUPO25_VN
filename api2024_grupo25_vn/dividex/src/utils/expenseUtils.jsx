@@ -1,8 +1,6 @@
-// src/utils/expenseUtils.js
-
 export const divideExpensesEqually = (ticket, miembros) => {
     if (!miembros || miembros.length === 0) {
-        return []; // Devuelve un arreglo vacío si no hay miembros
+        return [];
     }
 
     const totalMiembros = miembros.length;

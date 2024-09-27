@@ -19,10 +19,10 @@ const ProjectForm = ({ onSave, existingProject }) => {
       return;
     }
     
-  // Llamar la función onSave para enviar los datos al componente padre
+
   onSave({ id: existingProject ? existingProject.id : undefined, nombre, descripcion });
 
-  // Limpiar los campos del formulario y el error
+
   setNombre('');
   setDescripcion('');
   setError('');

@@ -1,19 +1,17 @@
-// src/components/TicketForm.js
-
 import React, { useState, useEffect } from 'react';
 
 const TicketForm = ({ onSave, miembrosIniciales }) => {
   const [fecha, setFecha] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [montoTotal, setMontoTotal] = useState(0);
-  const [divisionTipo, setDivisionTipo] = useState('equally'); // Por defecto, división equitativa
-  const [porcentajes, setPorcentajes] = useState([]); // Inicializar vacío
-  const [archivo, setArchivo] = useState(null); // Estado para manejar el archivo de imagen
-  const [miembros, setMiembros] = useState(miembrosIniciales || []); // Miembros disponibles
-  const [miembrosSeleccionados, setMiembrosSeleccionados] = useState([]); // Miembros seleccionados
+  const [divisionTipo, setDivisionTipo] = useState('equally'); 
+  const [porcentajes, setPorcentajes] = useState([]);
+  const [archivo, setArchivo] = useState(null);
+  const [miembros, setMiembros] = useState(miembrosIniciales || []);
+  const [miembrosSeleccionados, setMiembrosSeleccionados] = useState([]);
 
   useEffect(() => {
-    // Reiniciar porcentajes al cambiar miembros
+
     setPorcentajes(Array(miembrosSeleccionados.length).fill(0));
   }, [miembrosSeleccionados]);
 
@@ -30,19 +28,19 @@ const TicketForm = ({ onSave, miembrosIniciales }) => {
       return;
     }
 
-    // onSave({ fecha, descripcion, montoTotal, divisionTipo, porcentajes, archivo, miembrosSeleccionados });
+
 
     const nuevoTicket = { fecha, descripcion, montoTotal, divisionTipo, porcentajes, archivo, miembrosSeleccionados };
 
-    // Guardar el nuevo ticket en localStorage
+
     const storedTickets = JSON.parse(localStorage.getItem("tickets")) || [];
     storedTickets.push(nuevoTicket);
     localStorage.setItem("tickets", JSON.stringify(storedTickets));
 
-    // Llamar a onSave si necesitas hacer algo adicional
-    onSave(nuevoTicket); // Opcional
+
+    onSave(nuevoTicket); 
     
-    // Resetear el formulario
+
     setFecha('');
     setDescripcion('');
     setMontoTotal(0);
@@ -61,10 +59,10 @@ const TicketForm = ({ onSave, miembrosIniciales }) => {
   const handleMiembroSeleccionado = (miembroEmail) => {
     setMiembrosSeleccionados((prevSeleccionados) => {
       if (prevSeleccionados.includes(miembroEmail)) {
-        // Si ya está seleccionado, lo quitamos
+
         return prevSeleccionados.filter(email => email !== miembroEmail);
       } else {
-        // Si no está seleccionado, lo agregamos
+
         return [...prevSeleccionados, miembroEmail];
       }
     });
@@ -91,7 +89,7 @@ const TicketForm = ({ onSave, miembrosIniciales }) => {
         <label htmlFor="divisionTipo">Tipo de División:</label>
         <select id="divisionTipo" value={divisionTipo} onChange={(e) => {
           setDivisionTipo(e.target.value);
-          setPorcentajes(Array(miembrosSeleccionados.length).fill(0)); // Reiniciar porcentajes al cambiar tipo
+          setPorcentajes(Array(miembrosSeleccionados.length).fill(0));
         }}>
           <option value="equally">Equitativa</option>
           <option value="percentage">Por Porcentaje</option>
