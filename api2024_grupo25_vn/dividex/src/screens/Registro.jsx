@@ -31,7 +31,7 @@ function Registro() {
     event.preventDefault();
     setError('');
   
-    // Validación de campos
+  
     if (!nombre || !email || !password) {
       setError('Todos los campos son obligatorios.');
       return;
@@ -60,7 +60,7 @@ function Registro() {
     usuariosRegistrados.push(nuevoUsuario);
     localStorage.setItem('usuarios', JSON.stringify(usuariosRegistrados));
   
-    console.log('Usuarios Registrados:', usuariosRegistrados); // Imprimir el estado actual
+    console.log('Usuarios Registrados:', usuariosRegistrados);
     login(nuevoUsuario);
     console.log('Registro exitoso, navegando al dashboard');
     navigate('/home');
@@ -69,7 +69,7 @@ function Registro() {
 
 
   const Iralogin = () => {
-    navigate('/'); // Cambiado de window.location.href a navigate
+    navigate('/'); 
   };
 
 

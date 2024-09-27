@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import ProjectForm from '../components/ProjectForm';
 import { getProjects, saveProject, deleteProject } from '../services/projectService';
 import '../css/ProjectDashboard.css';
+import BarraNavegacion from '../components/Navbar';
 
 const ProjectDashboard = () => {
   const [projects, setProjects] = useState([]);
-  const navigate = useNavigate(); // Hook para navegación
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -53,12 +54,12 @@ const ProjectDashboard = () => {
   };
 
   return (
+    
     <div className="container">
+      <BarraNavegacion />
       <header className="header">
         <h2>Dashboard de Proyectos</h2>
-        <button onClick={() => navigate('/home')} className="back-button">
-          Volver a Home
-        </button>
+
       </header>
       <ProjectForm onSave={handleSaveProject} />
       <ul className="project-list">
@@ -76,6 +77,9 @@ const ProjectDashboard = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => navigate('/home')} className="back-button">
+          Volver a Home
+        </button>
     </div>
   );
 };
