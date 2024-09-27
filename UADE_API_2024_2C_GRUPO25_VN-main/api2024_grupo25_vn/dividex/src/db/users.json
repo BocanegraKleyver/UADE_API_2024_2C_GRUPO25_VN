@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "email": "usuario1@example.com",
+    "password": "hashed_password_1",
+    "name": "Juan",
+    "apellido": "Pérez",
+    "telefono": "1234567890"
+  },
+  {
+    "id": 2,
+    "email": "usuario2@example.com",
+    "password": "hashed_password_2",
+    "name": "María",
+    "apellido": "Gómez",
+    "telefono": "0987654321"
+  },
+  {
+    "id": 3,
+    "email": "usuario3@example.com",
+    "password": "hashed_password_3",
+    "name": "Luis",
+    "apellido": "Fernández",
+    "telefono": "1122334455"
+  }
+]
