@@ -1,43 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ProjectForm from '../components/ProjectForm';
 import { getProjects, saveProject, deleteProject } from '../services/projectService';
 import '../css/ProjectDashboard.css';
 
 const ProjectDashboard = () => {
   const [projects, setProjects] = useState([]);
+  const navigate = useNavigate(); // Hook para navegación
 
   useEffect(() => {
     const loadProjects = async () => {
-      const loadedProjects = await getProjects(); // Cargar proyectos al iniciar
-      setProjects(loadedProjects);
+      try {
+        const loadedProjects = await getProjects();
+        setProjects(loadedProjects);
+      } catch (error) {
+        console.error("Error loading projects:", error);
+      }
     };
 
     loadProjects();
   }, []);
 
   const handleSaveProject = async (project) => {
-    await saveProject(project);
-    const loadedProjects = await getProjects(); // Actualiza la lista de proyectos después de guardar
-    setProjects(loadedProjects);
+    try {
+      await saveProject(project);
+      const loadedProjects = await getProjects();
+      setProjects(loadedProjects);
+    } catch (error) {
+      console.error("Error saving project:", error);
+    }
   };
 
   const handleDeleteProject = async (projectId) => {
-    await deleteProject(projectId);
-    const loadedProjects = await getProjects(); // Actualiza la lista de proyectos
-    setProjects(loadedProjects);
+    try {
+      await deleteProject(projectId);
+      const loadedProjects = await getProjects();
+      setProjects(loadedProjects);
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
   };
 
   const handleFinalizeProject = async (project) => {
     const updatedProject = { ...project, estado: "finalizado" };
-    await saveProject(updatedProject);
-    const loadedProjects = await getProjects(); // Actualiza la lista de proyectos
-    setProjects(loadedProjects);
+    try {
+      await saveProject(updatedProject);
+      const loadedProjects = await getProjects();
+      setProjects(loadedProjects);
+    } catch (error) {
+      console.error("Error finalizing project:", error);
+    }
   };
 
   return (
     <div className="container">
-      <h2>Dashboard de Proyectos</h2>
+      <header className="header">
+        <h2>Dashboard de Proyectos</h2>
+        <button onClick={() => navigate('/home')} className="back-button">
+          Volver a Home
+        </button>
+      </header>
       <ProjectForm onSave={handleSaveProject} />
       <ul className="project-list">
         {projects.map((project) => (
@@ -46,10 +68,10 @@ const ProjectDashboard = () => {
               {project.nombre}
             </Link>
             <button onClick={() => handleFinalizeProject(project)} className="finalize-button">
-              ✓ {/* Tilde OK */}
+              ✓
             </button>
             <button onClick={() => handleDeleteProject(project.id)} className="delete-button">
-              ✖ {/* X para eliminar */}
+              ✖ 
             </button>
           </li>
         ))}
