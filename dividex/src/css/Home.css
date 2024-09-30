@@ -1,0 +1,74 @@
+.contenedor-principal {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: left;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* {{ edit_1 }} */
+.barra-navegacion {
+    position: fixed; /* Fijar la barra de navegación en la parte superior */
+    top: 0; /* Alinear al borde superior */
+    left: 0; /* Alinear al borde izquierdo */
+    right: 0; /* Alinear al borde derecho */
+    z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+    display: flex;
+    justify-content: flex-start; /* Alinear los elementos al inicio */
+    background-color: #007bff;
+    padding: 10px 0;
+    border-radius: 0 0 5px 5px; /* Bordes redondeados en la parte inferior */
+}
+
+.contenedor-principal {
+    margin-top: 60px; /* Añadir margen superior para evitar que el contenido se superponga con la barra de navegación */
+}
+
+.imagen-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.totales {
+    margin: 20px 0;
+}
+
+/* Nuevos estilos para la barra de navegación */
+.elemento-navegacion {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.elemento-navegacion:hover {
+    text-decoration: underline;
+}
+
+.elemento-navegacion.logout {
+    margin-left: auto; /* Empujar el enlace de salir a la derecha */
+}
+
+/* {{ edit_1 }} */
+.contenedor-totales {
+    display: flex; /* Usar flexbox para alinear los totalizadores en fila */
+    justify-content: space-around; /* Espaciado uniforme entre los totalizadores */
+    margin: 20px 0; /* Margen superior e inferior */
+}
+
+.caja-total {
+    background-color: #f0f0f0; /* Color de fondo para los totalizadores */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    /*text-align: center; /* Centrar el texto */
+    flex: 1; /* Permitir que los totalizadores crezcan uniformemente */
+    margin: 0 10px; /* Margen lateral entre totalizadores */
+}
+
+.icono-gastos, .icono-deuda, .icono-cobrar {
+    font-size: 24px; /* Tamaño del icono */
+    margin-bottom: 10px; /* Espacio entre el icono y el texto */
+}
