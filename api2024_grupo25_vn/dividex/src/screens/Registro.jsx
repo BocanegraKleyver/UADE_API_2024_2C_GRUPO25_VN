@@ -116,6 +116,7 @@ function Registro() {
                   onChange={(e) => setNombre(e.target.value)}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -128,6 +129,7 @@ function Registro() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -142,6 +144,7 @@ function Registro() {
                 />
               </Grid>
             </Grid>
+
             <Button
               type="submit"
               fullWidth

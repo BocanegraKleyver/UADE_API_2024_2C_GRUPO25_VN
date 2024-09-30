@@ -7,6 +7,7 @@ import BarraNavegacion from '../components/Navbar';
 
 const ProjectDashboard = () => {
   const [projects, setProjects] = useState([]);
+  const [projectFormVisible, setProjectFormVisible] = useState(false); // Definir el estado para el formulario
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -54,14 +55,13 @@ const ProjectDashboard = () => {
   };
 
   return (
-    
+    <>
+    <BarraNavegacion />
     <div className="container">
-      <BarraNavegacion />
+      
       <header className="header">
         <h2>Dashboard de Proyectos</h2>
-
-      </header>
-      <ProjectForm onSave={handleSaveProject} />
+      </header>      
       <ul className="project-list">
         {projects.map((project) => (
           <li key={project.id} className="project-item">
@@ -79,8 +79,11 @@ const ProjectDashboard = () => {
       </ul>
       <button onClick={() => navigate('/home')} className="back-button">
           Volver a Home
-        </button>
+      </button><> </>
+      <button onClick={() => setProjectFormVisible(!projectFormVisible)}>Cargar Proyecto</button>
+      {projectFormVisible && <ProjectForm onSave={handleSaveProject} />}
     </div>
+    </>
   );
 };
 

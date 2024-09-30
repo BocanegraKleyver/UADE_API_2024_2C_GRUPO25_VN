@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { getUsers, setUsuario } from '../services/userService';
+import { getUsers, setUsuario } from '../services/userService'; // Asegúrate de tener estas funciones
 
 const PerfilUsuario = () => {
   const [usuario, setUsuario] = useState({
@@ -20,7 +20,7 @@ const PerfilUsuario = () => {
 
   useEffect(() => {
     const cargarUsuario = async () => {
-      const usuarioAlmacenado = await getUsers();
+      const usuarioAlmacenado = await getUsers(); // Obtener datos del usuario
       setUsuario(usuarioAlmacenado);
     };
     cargarUsuario();
@@ -44,12 +44,12 @@ const PerfilUsuario = () => {
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
-    await setUsuario(usuario); 
+    await setUsuario(usuario); // Actualizar datos del usuario
     if (nuevaContrasena) {
-
-
+      // Lógica para resetear la contraseña si se proporciona
+      // Aquí puedes agregar la lógica para cambiar la contraseña
     }
-    navegar('/home');
+    navegar('/home'); // Redirigir al home después de guardar
   };
 
   return (

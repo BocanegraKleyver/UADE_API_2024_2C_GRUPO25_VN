@@ -20,19 +20,19 @@
   }
   
   .action-buttons {
-    margin-top: 20px; 
+    margin-top: 20px; /* Espacio entre miembros y botones */
   }
   
   .button {
     background-color: #007bff;
     color: white;
-    padding: 6px 12px; 
+    padding: 6px 12px; /* Tamaño más pequeño */
     border: none;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 14px; /* Fuente más pequeña */
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-right: 10px; 
+    margin-right: 10px; /* Espaciado entre botones */
   }
   
   .button:hover {

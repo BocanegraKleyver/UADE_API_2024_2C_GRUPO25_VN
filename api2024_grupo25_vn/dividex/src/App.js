@@ -46,16 +46,19 @@ function App() {
             element={<Registro onRegister={handleRegister} />}
           />
           <Route path="/proyectos" element={<ProjectDashboard />} />
-          <Route path="/report" element={<ReportScreen />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/ticket/:id" element={<TicketUpload />} />
           <Route
             path="/expense-summary"
             element={<ExpenseSummary tickets={tickets} />}
           />{" "}
+          {/* Pasa los tickets aquí */}
+          <Route path="/reportes" element={<ReportScreen />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </div>
     </Router>
   );
 }
+
 export default App;
